@@ -3,9 +3,12 @@ package host.enumerableentity.gamely.games.entity;
 import host.enumerableentity.gamely.games.entity.core.VideoGameEntity;
 import host.enumerableentity.gamely.games.kafka.entity.UserEntity;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.Hibernate;
@@ -17,11 +20,13 @@ import java.util.Objects;
 @Setter
 @Embeddable
 @FieldNameConstants
-public class CompletionKey implements Serializable {
-    @ManyToOne
+@NoArgsConstructor
+@AllArgsConstructor
+public class SelectionKey implements Serializable {
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private UserEntity user;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "VIDEO_GAME_ID")
     private VideoGameEntity game;
 
@@ -29,7 +34,7 @@ public class CompletionKey implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        CompletionKey that = (CompletionKey) o;
+        SelectionKey that = (SelectionKey) o;
         return getUser() != null && Objects.equals(getUser(), that.getUser())
                 && getGame() != null && Objects.equals(getGame(), that.getGame());
     }

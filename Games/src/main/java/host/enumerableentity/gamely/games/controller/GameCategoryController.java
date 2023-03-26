@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("categories")
 @RequiredArgsConstructor
-public class CategoryController {
+public class GameCategoryController {
 
     private final GameCategoryService gameCategoryService;
 

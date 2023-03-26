@@ -1,3 +1,3 @@
 package host.enumerableentity.gamely.games.dto;
 
-public record GamePlatformDTO(String title, String logoLink, String holder) { }
+public record GamePlatformDTO(Long id,String title, String logoLink, String holder) { }

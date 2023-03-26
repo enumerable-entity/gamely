@@ -1,7 +1,7 @@
 package host.enumerableentity.gamely.games.entity.core;
 
 
-import host.enumerableentity.gamely.games.entity.UserGameRecordEntity;
+import host.enumerableentity.gamely.games.entity.GameSelectionEntity;
 import host.enumerableentity.gamely.games.kafka.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,10 +19,10 @@ import static jakarta.persistence.GenerationType.AUTO;
 @Getter
 @Setter
 @Entity
-@Table(name = "COMPLETION_INFO")
+@Table(name = "WALKTHROUGH")
 @FieldNameConstants
 @ToString
-public class CompletionInfoEntity implements Serializable {
+public class WalkthroughEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = AUTO)
@@ -50,18 +50,17 @@ public class CompletionInfoEntity implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "PLATFORM_ID")
     private GamePlatformEntity platform;
-
     @ToString.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    @JoinColumn(name = "VIDEO_GAME_ID", nullable = false)
-    private UserGameRecordEntity userGameRecordEntity;
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = false)
+    @JoinColumn(name = "VIDEO_GAME_ID", referencedColumnName = "VIDEO_GAME_ID",nullable = false)
+    private GameSelectionEntity gameSelectionEntity;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        CompletionInfoEntity that = (CompletionInfoEntity) o;
+        WalkthroughEntity that = (WalkthroughEntity) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 
