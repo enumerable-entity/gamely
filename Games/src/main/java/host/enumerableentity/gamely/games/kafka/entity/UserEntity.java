@@ -1,6 +1,6 @@
-package host.enumerableentity.gamely.games.entity;
+package host.enumerableentity.gamely.games.kafka.entity;
 
-import host.enumerableentity.gamely.games.kafka.entity.UserEntity;
+import host.enumerableentity.gamely.games.entity.GameCategoryEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,41 +9,37 @@ import lombok.experimental.FieldNameConstants;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "GAME_CATEGORIES")
+@Table(name = "USERS_SYNC")
 @FieldNameConstants
 @ToString
-public class GameCategoryEntity implements Serializable {
+public class UserEntity implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID", nullable = false)
     private Long id;
+
     @Column(name = "IS_DELETED", nullable = false)
     private Boolean isDeleted = false;
-    @Column(name = "TITLE", nullable = false, length = 100)
-    private String title;
-    @Column(name = "LOGO_LINK", length = 250)
-    private String logoLink;
-    @Column(name = "DESCRIPTION", length = 500)
-    private String description;
+
+    @Column(name = "USERNAME", nullable = false, length = 30)
+    private String username;
 
     @ToString.Exclude
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    private UserEntity user;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.REMOVE, CascadeType.DETACH}, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<GameCategoryEntity> categories = new LinkedHashSet<>();
 
-    @Column(name = "USER_ID", nullable = false, insertable = false, updatable = false)
-    private Long userId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        GameCategoryEntity that = (GameCategoryEntity) o;
+        UserEntity that = (UserEntity) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 

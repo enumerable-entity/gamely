@@ -28,7 +28,6 @@ public class VideoGameEntity implements Serializable {
     private Long id;
     @Column(name = "IS_DELETED", nullable = false)
     private Boolean isDeleted = false;
-
     @Column(name = "TITLE", nullable = false, length = 100)
     private String title;
     @Column(name = "RELEASE_DATE")
@@ -40,9 +39,12 @@ public class VideoGameEntity implements Serializable {
     @Column(name = "WIKI_LINK", length = 250)
     private String wikiLink;
 
-    @ManyToMany(mappedBy = "videoGames", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "GAME_PLATFORMS_TO_VIDEO_GAMES",
+            joinColumns = @JoinColumn(name = "VIDEO_GAME_ID", referencedColumnName = "ID", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "GAME_PLATFORM_ID", referencedColumnName = "ID", nullable = false))
     @ToString.Exclude
-    private Set<GamePlatformEntity> gamePlatforms = new LinkedHashSet<>();
+    private Set<GamePlatformEntity> platforms = new LinkedHashSet<>();
 
     @Override
     public boolean equals(Object o) {

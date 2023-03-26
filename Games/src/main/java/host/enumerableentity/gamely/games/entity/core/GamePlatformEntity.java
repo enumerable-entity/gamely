@@ -32,10 +32,7 @@ public class GamePlatformEntity implements Serializable {
     @Column(name = "HOLDER", length = 100)
     private String holder;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "GAME_PLATFORMS_TO_VIDEO_GAMES",
-            joinColumns = @JoinColumn(name = "GAME_PLATFORM_ID"),
-            inverseJoinColumns = @JoinColumn(name = "VIDEO_GAME_ID"))
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "platforms")
     @ToString.Exclude
     private Set<VideoGameEntity> videoGames = new LinkedHashSet<>();
 
