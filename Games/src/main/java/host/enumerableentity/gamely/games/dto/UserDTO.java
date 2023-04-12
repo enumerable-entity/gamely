@@ -1,4 +1,8 @@
 package host.enumerableentity.gamely.games.dto;
 
-public record UserDTO(Long id, String username) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record UserDTO(
+        Long id,
+        @JsonProperty(access = JsonProperty.Access.READ_ONLY) String username) {
 }

@@ -17,17 +17,17 @@ public class UserSelectionController {
 
     private final SelectionService selectionService;
 
-    @Operation(summary = "Add game to user category. If category is not specified, game will be added to 'Default' category.")
+    @Operation(summary = "Add game to user userCategory. If userCategory is not specified, game will be added to 'Default' userCategory.")
     @PostMapping
     public ResponseEntity<Void> addGameToCategory(@RequestParam Long gameId, @RequestParam(required = false) Long categoryId) {
         selectionService.addGameToCategory(gameId, categoryId);
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Remove game from user selection")
+    @Operation(summary = "Remove game from user userCategory")
     @DeleteMapping
     public ResponseEntity<Void> removeGameFromSelection(@RequestParam Long gameId) {
-        selectionService.removeGameFromSelection(gameId);
+        selectionService.removeGameFromCategory(gameId);
         return ResponseEntity.noContent().build();
     }
 

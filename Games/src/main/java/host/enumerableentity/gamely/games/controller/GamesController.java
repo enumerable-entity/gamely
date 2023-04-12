@@ -30,6 +30,7 @@ public class GamesController {
             @RequestParam(required = false, defaultValue = "0") Integer page,
             @RequestParam(required = false, defaultValue = "25") Integer size,
             @RequestParam(required = false, defaultValue = "title") String sort) {
+        log.debug("Get all games with page: {}, size: {}, sort: {}", page, size, sort);
         return ResponseEntity.ok(gamesService.getAllGames(PageRequest.of(page, size, Sort.by(sort))));
     }
 }

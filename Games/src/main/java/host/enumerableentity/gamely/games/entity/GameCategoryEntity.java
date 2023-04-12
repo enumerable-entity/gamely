@@ -32,7 +32,7 @@ public class GameCategoryEntity implements Serializable {
     private String description;
 
     @ToString.Exclude
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID", nullable = false)
     private UserEntity user;
 

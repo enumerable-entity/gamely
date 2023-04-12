@@ -23,10 +23,12 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SelectionKey implements Serializable {
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     private UserEntity user;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "VIDEO_GAME_ID")
     private VideoGameEntity game;
 

@@ -39,13 +39,13 @@ public class GameCategoryController {
         return ResponseEntity.ok(gameCategoryService.getCategoriesDictionary());
     }
 
-    @Operation(summary = "Add new category")
+    @Operation(summary = "Add new userCategory")
     @PostMapping
     public ResponseEntity<GameCategoryDTO> addNewCategory(GameCategoryDTO gameCategoryDTO) {
         return ResponseEntity.ok(gameCategoryService.addNewCategory(gameCategoryDTO));
     }
 
-    @Operation(summary = "Update category")
+    @Operation(summary = "Update userCategory")
     @PutMapping
     public ResponseEntity<GameCategoryDTO> updateCategory(GameCategoryDTO gameCategoryDTO) {
         return ResponseEntity.ok(gameCategoryService.addNewCategory(gameCategoryDTO));

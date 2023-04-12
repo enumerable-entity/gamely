@@ -28,7 +28,8 @@ public class WalkthroughEntity implements Serializable {
     @GeneratedValue(strategy = AUTO)
     @Column(name = "ID", nullable = false)
     private Long id;
-
+    @Column(name = "ENABLED", nullable = false)
+    private boolean enabled = true;
     @Column(name = "DATE", nullable = true)
     private LocalDate date;
     @Column(name = "DURATION", nullable = true)
@@ -43,18 +44,18 @@ public class WalkthroughEntity implements Serializable {
     private String externalUsernameCoop;
 
     @ToString.Exclude
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_COOP_ID")
     private UserEntity internalUserCoop;
     @ToString.Exclude
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "PLATFORM_ID")
     private GamePlatformEntity platform;
     @ToString.Exclude
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = false)
     @JoinColumn(name = "VIDEO_GAME_ID", referencedColumnName = "VIDEO_GAME_ID",nullable = false)
-    private GameSelectionEntity gameSelectionEntity;
+    private GameSelectionEntity gameSelection;
 
     @Override
     public boolean equals(Object o) {

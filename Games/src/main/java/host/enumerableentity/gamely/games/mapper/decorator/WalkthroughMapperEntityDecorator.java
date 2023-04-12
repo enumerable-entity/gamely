@@ -37,7 +37,7 @@ public abstract class WalkthroughMapperEntityDecorator implements WalkthroughMap
 
         walkthroughEntity.setInternalUserCoop(userRepository.getReferenceById(walkthroughDTO.internalCoopUser().id()));
         walkthroughEntity.setPlatform(gamePlatformRepository.getReferenceById(walkthroughDTO.platform().id()));
-        walkthroughEntity.setGameSelectionEntity(gameSelectionRepository.getReferenceById(selectionKey));
+        walkthroughEntity.setGameSelection(gameSelectionRepository.getReferenceById(selectionKey));
         return walkthroughEntity;
     }
 }

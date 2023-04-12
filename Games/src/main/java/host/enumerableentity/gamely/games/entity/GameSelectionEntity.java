@@ -23,12 +23,13 @@ public class GameSelectionEntity implements Serializable {
     @EmbeddedId
     private SelectionKey selectionKey;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "GAME_CATEGORY_ID")
+    @ToString.Exclude
     private GameCategoryEntity category;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "gameSelectionEntity", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "gameSelection", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<WalkthroughEntity> completions;
 
 
