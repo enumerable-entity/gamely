@@ -5,7 +5,6 @@ import host.enumerableentity.gamely.auth.dto.AuthenticationResponse;
 import host.enumerableentity.gamely.auth.dto.RegistrationRequest;
 import host.enumerableentity.gamely.auth.entity.SystemUserEntity;
 import host.enumerableentity.gamely.auth.kafka.KafkaMessageSender;
-import host.enumerableentity.gamely.auth.kafka.KafkaTopicConfig;
 import host.enumerableentity.gamely.auth.mapper.UserMapper;
 import host.enumerableentity.gamely.auth.repository.SystemUserRepository;
 import host.enumerableentity.gamely.commons.dto.UserSyncDto;
@@ -15,6 +14,8 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
+
+import static host.enumerableentity.gamely.commons.kafka.TopicsConstants.USERS_TOPIC;
 
 @Service
 @RequiredArgsConstructor
@@ -46,9 +47,10 @@ public class RegistrationService {
     }
 
     @TransactionalEventListener
-    public void publishNewUserToKafkaTopic(UserRegisteredEvent event){
-        kafkaUserSender.send(KafkaTopicConfig.USERS_TOPIC, userMapper.toSyncDto(event.user()));
+    public void publishNewUserToKafkaTopic(UserRegisteredEvent event) {
+        kafkaUserSender.send(USERS_TOPIC, userMapper.toSyncDto(event.user()));
     }
 
-    private record UserRegisteredEvent(SystemUserEntity user){}
+    private record UserRegisteredEvent(SystemUserEntity user) {
+    }
 }

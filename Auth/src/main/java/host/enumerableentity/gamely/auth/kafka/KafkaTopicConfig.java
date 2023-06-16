@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
+import static host.enumerableentity.gamely.commons.kafka.TopicsConstants.USERS_TOPIC;
+
 @Configuration
 public class KafkaTopicConfig {
-
-    public static final String USERS_TOPIC = "users";
 
     @Bean
     public NewTopic usersSyncTopic() {

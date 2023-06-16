@@ -1,7 +1,6 @@
 package host.enumerableentity.gamely.games.entity;
 
 import host.enumerableentity.gamely.games.entity.core.VideoGameEntity;
-import host.enumerableentity.gamely.games.kafka.entity.UserEntity;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;

@@ -1,6 +1,5 @@
-package host.enumerableentity.gamely.games.kafka.entity;
+package host.enumerableentity.gamely.games.entity;
 
-import host.enumerableentity.gamely.games.entity.GameCategoryEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,8 +23,8 @@ public class UserEntity implements Serializable {
     @Column(name = "ID", nullable = false)
     private Long id;
 
-    @Column(name = "IS_DELETED", nullable = false)
-    private Boolean isDeleted = false;
+    @Column(name = "IS_ENABLED", nullable = false)
+    private Boolean isEnabled = false;
 
     @Column(name = "USERNAME", nullable = false, length = 30)
     private String username;

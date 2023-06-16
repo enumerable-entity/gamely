@@ -1,8 +1,6 @@
 package host.enumerableentity.gamely.auth.service;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.TextCodec;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,7 +17,6 @@ import static host.enumerableentity.gamely.auth.config.security.SecurityConstant
 @Service
 @RequiredArgsConstructor
 public class JwtService {
-
 
 
     public String generateToken(UserDetails userDetails) {
@@ -64,5 +61,15 @@ public class JwtService {
                 .setSigningKey(SECRET)
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    private boolean isTokenValid(String token) {
+        try {
+            Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
+            return true;
+        } catch (SignatureException | MalformedJwtException | ExpiredJwtException | UnsupportedJwtException |
+                 IllegalArgumentException ex) {
+            return false;
+        }
     }
 }

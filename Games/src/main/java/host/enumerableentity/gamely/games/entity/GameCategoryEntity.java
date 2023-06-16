@@ -1,6 +1,5 @@
 package host.enumerableentity.gamely.games.entity;
 
-import host.enumerableentity.gamely.games.kafka.entity.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
