@@ -10,10 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static host.enumerableentity.gamely.games.commons.ServiceConstants.API_PREFIX;
 
@@ -30,9 +27,19 @@ public class GamesController {
     @GetMapping
     public ResponseEntity<Page<VideoGameDTO>> getAllGames(
             @RequestParam(required = false, defaultValue = "0") Integer page,
-            @RequestParam(required = false, defaultValue = "25") Integer size,
-            @RequestParam(required = false, defaultValue = "title") String sort) {
+            @RequestParam(required = false, defaultValue = "5") Integer size,
+            @RequestParam(required = false, defaultValue = "title") String sort,
+            @RequestParam(required = false) String search) {
         log.debug("Get all games with page: {}, size: {}, sort: {}", page, size, sort);
-        return ResponseEntity.ok(gamesService.getAllGames(PageRequest.of(page, size, Sort.by(sort))));
+        return ResponseEntity.ok(gamesService.getAllGames(PageRequest.of(page, size, Sort.by(sort)), search));
     }
+
+
+    @Operation(summary = "Get all public available games")
+    @GetMapping("/{id}")
+    public ResponseEntity<VideoGameDTO> getById(@PathVariable Long id) {
+        log.debug("Get video game by id: {}", id);
+        return ResponseEntity.ok(gamesService.getById(id));
+    }
+
 }

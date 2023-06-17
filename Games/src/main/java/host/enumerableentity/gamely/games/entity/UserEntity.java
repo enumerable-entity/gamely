@@ -6,12 +6,15 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.Hibernate;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Indexed(index = "users_idx", backend = "lucene")
 @Getter
 @Setter
 @Entity
@@ -26,6 +29,7 @@ public class UserEntity implements Serializable {
     @Column(name = "IS_ENABLED", nullable = false)
     private Boolean isEnabled = false;
 
+    @FullTextField
     @Column(name = "USERNAME", nullable = false, length = 30)
     private String username;
 
