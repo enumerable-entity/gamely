@@ -43,13 +43,13 @@ public class GameCategoryController {
 
     @Operation(summary = "Add new userCategory")
     @PostMapping
-    public ResponseEntity<GameCategoryDTO> addNewCategory(GameCategoryDTO gameCategoryDTO) {
+    public ResponseEntity<GameCategoryDTO> addNewCategory(@RequestBody GameCategoryDTO gameCategoryDTO) {
         return ResponseEntity.ok(gameCategoryService.addNewCategory(gameCategoryDTO));
     }
 
     @Operation(summary = "Update userCategory")
     @PutMapping
-    public ResponseEntity<GameCategoryDTO> updateCategory(GameCategoryDTO gameCategoryDTO) {
+    public ResponseEntity<GameCategoryDTO> updateCategory(@RequestBody GameCategoryDTO gameCategoryDTO) {
         return ResponseEntity.ok(gameCategoryService.addNewCategory(gameCategoryDTO));
     }
 }

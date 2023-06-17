@@ -12,7 +12,12 @@ spring:
           uri: http://localhost:8084/
           predicates:
             - Path=/api/v1/api/**
-
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
 
 server:
   port: 9000

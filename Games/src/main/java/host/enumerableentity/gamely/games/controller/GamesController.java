@@ -35,7 +35,7 @@ public class GamesController {
     }
 
 
-    @Operation(summary = "Get all public available games")
+    @Operation(summary = "Get game by id")
     @GetMapping("/{id}")
     public ResponseEntity<VideoGameDTO> getById(@PathVariable Long id) {
         log.debug("Get video game by id: {}", id);

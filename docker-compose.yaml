@@ -1,7 +1,33 @@
-# Use postgres/example user/password credentials
 version: '3.1'
 
 services:
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 22181:2181
+    networks:
+      - gamely-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 9093:9093
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LISTENERS: EXTERNAL_SAME_HOST://:9092,EXTERNAL_DIFFERENT_HOST://:9093,INTERNAL://:29092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:29092,EXTERNAL_SAME_HOST://localhost:9092,EXTERNAL_DIFFERENT_HOST://192.168.0.19:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT,EXTERNAL_DIFFERENT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+    networks:
+      - gamely-network
 
   postgres:
     image: postgres
@@ -12,3 +38,90 @@ services:
       - ./db-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    networks:
+      - gamely-network
+
+  gateway:
+    container_name: gamely-gateway
+    restart: always
+    depends_on:
+      - discovery
+    build:
+      context: ./Gateway
+      dockerfile: ./Dockerfile
+    command: java -jar ./target/gateway-0.0.1-SNAPSHOT.jar
+    ports:
+      - "9000:9000"
+    networks:
+      - gamely-network
+
+  discovery:
+    container_name: gamely-discovery
+    restart: always
+    build:
+      context: ./Discovery
+      dockerfile: ./Dockerfile
+    command: java -jar ./target/discovery-0.0.1-SNAPSHOT.jar
+    networks:
+      - gamely-network
+
+  games:
+    container_name: gamely-games
+    restart: always
+    depends_on:
+      - discovery
+    build:
+      context: ./Games
+      dockerfile: ./Dockerfile
+    command: java -jar ./target/games-0.0.1-SNAPSHOT.jar
+    networks:
+      - gamely-network
+
+
+  exporter:
+    container_name: gamely-exporter
+    restart: always
+    depends_on:
+      - discovery
+    build:
+      context: ./Exporter
+      dockerfile: ./Dockerfile
+    command: java -jar ./target/exporter-0.0.1-SNAPSHOT.jar
+    networks:
+      - gamely-network
+
+  auth:
+    container_name: gamely-auth
+    restart: always
+    depends_on:
+      - discovery
+    build:
+      context: ./Auth
+      dockerfile: ./Dockerfile
+    command: java -jar ./target/auth-0.0.1-SNAPSHOT.jar
+    networks:
+      - gamely-network
+
+  frontend:
+    container_name: gamely-front
+    restart: always
+    env_file:
+      - .env.${NODE_ENV}
+    build:
+      context: ./front
+      dockerfile: ./Dockerfile
+    command: npm run dev
+    depends_on:
+      - gateway
+    volumes:
+      - ./services/front:/usr/src/cryptotalks-front
+    ports:
+      - "80:80"
+    networks:
+      - gamely-network
+
+
+networks:
+  gamely-network:
+    driver: bridge
+    external: true
