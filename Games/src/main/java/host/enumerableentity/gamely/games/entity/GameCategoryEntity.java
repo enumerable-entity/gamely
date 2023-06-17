@@ -8,6 +8,7 @@ import lombok.experimental.FieldNameConstants;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -37,6 +38,11 @@ public class GameCategoryEntity implements Serializable {
 
     @Column(name = "USER_ID", nullable = false, insertable = false, updatable = false)
     private Long userId;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @ToString.Exclude
+    private List<GameSelectionEntity> gameSelection;
+
 
     @Override
     public boolean equals(Object o) {

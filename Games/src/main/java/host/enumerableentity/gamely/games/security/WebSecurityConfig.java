@@ -29,7 +29,7 @@ public class WebSecurityConfig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers(API_PREFIX + "/registration", API_PREFIX + "/login", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers(API_PREFIX + "/registration", API_PREFIX + "/login", "/swagger-ui/**", "/v3/api-docs/**","/resources/**", "/static/**","/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

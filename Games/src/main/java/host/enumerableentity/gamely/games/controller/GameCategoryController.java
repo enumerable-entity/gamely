@@ -5,6 +5,7 @@ import host.enumerableentity.gamely.commons.dto.GameCategoryDTO;
 import host.enumerableentity.gamely.games.service.GameCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.ws.rs.Path;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -50,6 +51,13 @@ public class GameCategoryController {
     @Operation(summary = "Update userCategory")
     @PutMapping
     public ResponseEntity<GameCategoryDTO> updateCategory(@RequestBody GameCategoryDTO gameCategoryDTO) {
-        return ResponseEntity.ok(gameCategoryService.addNewCategory(gameCategoryDTO));
+        return ResponseEntity.ok(gameCategoryService.updateCategory(gameCategoryDTO));
+    }
+
+    @Operation(summary = "Delete userCategory")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        gameCategoryService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

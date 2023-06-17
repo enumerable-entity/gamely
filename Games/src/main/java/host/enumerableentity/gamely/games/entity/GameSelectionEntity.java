@@ -7,6 +7,7 @@ import lombok.experimental.FieldNameConstants;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -30,7 +31,7 @@ public class GameSelectionEntity implements Serializable {
 
     @ToString.Exclude
     @OneToMany(mappedBy = "gameSelection", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private Set<WalkthroughEntity> completions;
+    private List<WalkthroughEntity> completions;
 
 
     @Override

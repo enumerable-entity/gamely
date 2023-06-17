@@ -1,6 +1,8 @@
 package host.enumerableentity.gamely.games.controller;
 
 import host.enumerableentity.gamely.commons.dto.UserDTO;
+import host.enumerableentity.gamely.games.commons.DictionaryDTO;
+import host.enumerableentity.gamely.games.service.GamePlatformService;
 import host.enumerableentity.gamely.games.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,10 +25,17 @@ import static host.enumerableentity.gamely.games.commons.ServiceConstants.API_PR
 @RequiredArgsConstructor
 public class DictionaryController {
     private final UserService userService;
+    private final GamePlatformService gamePlatformService;
 
     @Operation(summary = "Search for users")
     @GetMapping
     public ResponseEntity<List<UserDTO>> getUsersDict(@RequestParam String search) {
         return ResponseEntity.ok(userService.findUserByUsername(search));
+    }
+
+    @Operation(summary = "Search for users")
+    @GetMapping
+    public ResponseEntity<List<DictionaryDTO>> getPlatformDict() {
+        return ResponseEntity.ok(gamePlatformService.getPlatformDict());
     }
 }

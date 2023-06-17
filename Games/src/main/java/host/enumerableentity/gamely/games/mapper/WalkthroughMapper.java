@@ -24,7 +24,7 @@ public interface WalkthroughMapper {
     @Mapping(target = "gameId", source = "walkthroughEntity.gameSelection.selectionKey.game.id")
     WalkthroughDTO toDTO(WalkthroughEntity walkthroughEntity);
 
-    List<WalkthroughDTO> toDTOs(Set<WalkthroughEntity> allWalkthroughes);
+    List<WalkthroughDTO> toDTOs(List<WalkthroughEntity> allWalkthroughes);
 
     @Mapping(target = "userCategory", source = "walkthroughEntity.gameSelection.category")
     @Mapping(target = "walkthroughes", source = "walkthroughEntity.gameSelection.completions")

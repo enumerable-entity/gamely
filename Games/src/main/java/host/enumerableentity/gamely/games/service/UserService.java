@@ -3,6 +3,7 @@ package host.enumerableentity.gamely.games.service;
 import host.enumerableentity.gamely.commons.dto.UserDTO;
 import host.enumerableentity.gamely.games.entity.UserEntity;
 import host.enumerableentity.gamely.games.mapper.UserMapper;
+import host.enumerableentity.gamely.games.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.search.engine.search.query.SearchResult;
@@ -21,6 +22,7 @@ public class UserService {
 
     private final EntityManager entityManager;
     private final UserMapper userMapper;
+    private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
     public List<UserDTO> findUserByUsername(String usernameS) {
@@ -34,6 +36,10 @@ public class UserService {
                         .fuzzy(2))
                 .fetch(3);
         return userMapper.toDTOs(result.hits());
+    }
+
+    public Long getIdByUsername(String username) {
+        return userRepository.getIdByUserName(username);
     }
 
 }

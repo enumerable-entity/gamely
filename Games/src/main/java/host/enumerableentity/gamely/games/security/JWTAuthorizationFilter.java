@@ -30,7 +30,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
         String header = request.getHeader(HEADER_STRING);
-        Enumeration<String> headerNames = request.getHeaderNames();
 
         if (header == null || !header.startsWith(TOKEN_PREFIX)) {
             chain.doFilter(request, response);

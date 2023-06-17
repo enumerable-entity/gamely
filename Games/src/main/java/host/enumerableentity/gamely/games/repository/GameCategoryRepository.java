@@ -14,6 +14,6 @@ import java.util.List;
 public interface GameCategoryRepository extends JpaRepository<GameCategoryEntity, Long> {
     Page<GameCategoryEntity> findAllByUserId(Long userId, Pageable paginationInfo);
 
-    @Query("SELECT new host.enumerableentity.gamely.games.commons.DictionaryDTO(c.id, c.title) FROM GameCategoryEntity c")
-    List<DictionaryDTO> getDictionary();
+    @Query("SELECT new host.enumerableentity.gamely.games.commons.DictionaryDTO(c.id, c.title) FROM GameCategoryEntity c WHERE c.user.id = :userId")
+    List<DictionaryDTO> getDictionary(Long userId);
 }

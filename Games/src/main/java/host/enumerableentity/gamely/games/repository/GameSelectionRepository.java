@@ -13,4 +13,7 @@ public interface GameSelectionRepository extends JpaRepository<GameSelectionEnti
 
     @EntityGraph(attributePaths = {"category", "completions.internalUserCoop", "completions.platform"})
     List<GameSelectionEntity> findAllBySelectionKeyUserId(Long userId);
+
+    @EntityGraph(attributePaths = {"category", "completions.internalUserCoop", "completions.platform"})
+    List<GameSelectionEntity> findAllBySelectionKey_UserId(Long userId);
 }

@@ -19,7 +19,7 @@ public class ExportService {
 
 
     public void getExportedFile(HttpServletResponse response) throws IOException {
-        List<WalkthroughDTO> allWalkthroughes = walkthroughService.getAllWalkthroughesForGame(1L);
+        List<WalkthroughDTO> allWalkthroughes = walkthroughService.getAllWalkthroughesForUser();
         Response xls = exportClient.getXls(allWalkthroughes);
         response.getOutputStream().write(xls.body().asInputStream().readAllBytes());
         response.getOutputStream().close();

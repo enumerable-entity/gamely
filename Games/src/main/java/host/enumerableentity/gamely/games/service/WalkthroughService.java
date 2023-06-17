@@ -2,10 +2,11 @@ package host.enumerableentity.gamely.games.service;
 
 import host.enumerableentity.gamely.commons.dto.WalkthroughDTO;
 import host.enumerableentity.gamely.commons.dto.WalkthroughFlatDTO;
-import host.enumerableentity.gamely.games.entity.GameSelectionEntity;
 import host.enumerableentity.gamely.games.entity.core.WalkthroughEntity;
 import host.enumerableentity.gamely.games.mapper.WalkthroughMapper;
+import host.enumerableentity.gamely.games.repository.UserRepository;
 import host.enumerableentity.gamely.games.repository.WalkthroughRepository;
+import host.enumerableentity.gamely.games.security.SecurityUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class WalkthroughService {
     private final WalkthroughRepository walkthroughRepository;
     private final SelectionService selectionService;
     private final WalkthroughMapper walkthroughMapper;
+    private final UserRepository userRepository;
 
     @Transactional
     public WalkthroughDTO addWalkthrough(WalkthroughDTO walkthroughDTO) {
@@ -35,6 +37,10 @@ public class WalkthroughService {
 
     public List<WalkthroughDTO> getAllWalkthroughesForGame(Long gameId) {
         return walkthroughMapper.toDTOs(selectionService.getAllWalkthroughesForGame(gameId));
+    }
+
+    public List<WalkthroughDTO> getAllWalkthroughesForUser() {
+        return walkthroughMapper.toDTOs(selectionService.getAllWalkthroughesForUser(userRepository.getIdByUserName(SecurityUtils.getCurrentUserName())));
     }
 
     @Transactional
