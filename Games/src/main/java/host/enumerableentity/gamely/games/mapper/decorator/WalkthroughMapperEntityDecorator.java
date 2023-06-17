@@ -1,6 +1,6 @@
 package host.enumerableentity.gamely.games.mapper.decorator;
 
-import host.enumerableentity.gamely.games.dto.WalkthroughDTO;
+import host.enumerableentity.gamely.commons.dto.WalkthroughDTO;
 import host.enumerableentity.gamely.games.entity.SelectionKey;
 import host.enumerableentity.gamely.games.entity.core.WalkthroughEntity;
 import host.enumerableentity.gamely.games.mapper.WalkthroughMapper;

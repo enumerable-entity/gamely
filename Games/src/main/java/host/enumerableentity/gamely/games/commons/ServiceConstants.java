@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ServiceConstants {
 
-    public static final String API_PREFIX = "/api/v1/auth";
+    public static final String API_PREFIX = "/api/v1/api";
 }

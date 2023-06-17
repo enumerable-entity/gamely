@@ -1,7 +1,7 @@
 package host.enumerableentity.gamely.games.controller;
 
-import host.enumerableentity.gamely.games.dto.WalkthroughDTO;
-import host.enumerableentity.gamely.games.dto.WalkthroughFlatDTO;
+import host.enumerableentity.gamely.commons.dto.WalkthroughDTO;
+import host.enumerableentity.gamely.commons.dto.WalkthroughFlatDTO;
 import host.enumerableentity.gamely.games.service.WalkthroughService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static host.enumerableentity.gamely.games.commons.ServiceConstants.API_PREFIX;
+
 @Tag(name = "Walkthrough controller", description = "Controller for managing walkthrough's of user games")
 @Slf4j
 @RestController
-@RequestMapping("games")
+@RequestMapping(API_PREFIX + "/games")
 @RequiredArgsConstructor
 public class WalkthroughController {
 

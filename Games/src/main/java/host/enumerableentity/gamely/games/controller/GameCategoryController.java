@@ -1,7 +1,7 @@
 package host.enumerableentity.gamely.games.controller;
 
 import host.enumerableentity.gamely.games.commons.DictionaryDTO;
-import host.enumerableentity.gamely.games.dto.GameCategoryDTO;
+import host.enumerableentity.gamely.commons.dto.GameCategoryDTO;
 import host.enumerableentity.gamely.games.service.GameCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static host.enumerableentity.gamely.games.commons.ServiceConstants.API_PREFIX;
+
 @Tag(name = "Categories controller", description = "Controller for user categories management")
 @Slf4j
 @RestController
-@RequestMapping("categories")
+@RequestMapping(API_PREFIX + "/categories")
 @RequiredArgsConstructor
 public class GameCategoryController {
 

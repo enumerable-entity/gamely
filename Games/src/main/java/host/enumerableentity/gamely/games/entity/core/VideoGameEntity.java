@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.Hibernate;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ import java.util.Set;
 
 import static jakarta.persistence.GenerationType.AUTO;
 
+@Indexed(index = "games_idx", backend = "lucene")
 @Getter
 @Setter
 @Entity
@@ -28,6 +31,7 @@ public class VideoGameEntity implements Serializable {
     private Long id;
     @Column(name = "IS_DELETED", nullable = false)
     private Boolean isDeleted = false;
+    @FullTextField
     @Column(name = "TITLE", nullable = false, length = 100)
     private String title;
     @Column(name = "RELEASE_DATE")

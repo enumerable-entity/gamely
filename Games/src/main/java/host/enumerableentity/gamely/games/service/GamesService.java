@@ -1,6 +1,6 @@
 package host.enumerableentity.gamely.games.service;
 
-import host.enumerableentity.gamely.games.dto.VideoGameDTO;
+import host.enumerableentity.gamely.commons.dto.VideoGameDTO;
 import host.enumerableentity.gamely.games.mapper.VideoGameMapper;
 import host.enumerableentity.gamely.games.repository.VideoGameRepository;
 import lombok.RequiredArgsConstructor;

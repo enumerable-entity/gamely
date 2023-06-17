@@ -1,7 +1,7 @@
 package host.enumerableentity.gamely.games.service;
 
 import host.enumerableentity.gamely.games.commons.DictionaryDTO;
-import host.enumerableentity.gamely.games.dto.GameCategoryDTO;
+import host.enumerableentity.gamely.commons.dto.GameCategoryDTO;
 import host.enumerableentity.gamely.games.entity.GameCategoryEntity;
 import host.enumerableentity.gamely.games.mapper.GameCategoryMapper;
 import host.enumerableentity.gamely.games.repository.GameCategoryRepository;

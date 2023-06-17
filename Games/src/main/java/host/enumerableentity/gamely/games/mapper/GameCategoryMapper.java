@@ -1,6 +1,6 @@
 package host.enumerableentity.gamely.games.mapper;
 
-import host.enumerableentity.gamely.games.dto.GameCategoryDTO;
+import host.enumerableentity.gamely.commons.dto.GameCategoryDTO;
 import host.enumerableentity.gamely.games.entity.GameCategoryEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

@@ -1,6 +1,6 @@
 package host.enumerableentity.gamely.games.controller;
 
-import host.enumerableentity.gamely.games.dto.VideoGameDTO;
+import host.enumerableentity.gamely.commons.dto.VideoGameDTO;
 import host.enumerableentity.gamely.games.service.GamesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static host.enumerableentity.gamely.games.commons.ServiceConstants.API_PREFIX;
+
 @Tag(name = "Public games controller", description = "Controller for games")
 @Slf4j
 @RestController
-@RequestMapping("games")
+@RequestMapping(API_PREFIX + "/games")
 @RequiredArgsConstructor
 public class GamesController {
 

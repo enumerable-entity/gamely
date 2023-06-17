@@ -46,7 +46,7 @@ public class SelectionService {
 
     public Set<WalkthroughEntity> getAllWalkthroughesForGame(Long gameId) {
         SelectionKey selectionKey = new SelectionKey(
-                userRepository.getReferenceById(-1L),
+                userRepository.getReferenceById(302L),
                 videoGameRepository.getReferenceById(gameId));
         return gameSelectionRepository.findById(selectionKey)
                 .map(GameSelectionEntity::getCompletions)

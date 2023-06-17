@@ -56,6 +56,16 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-mapper-orm-orm6</artifactId>
+            <version>6.1.8.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.search</groupId>
+            <artifactId>hibernate-search-backend-lucene</artifactId>
+            <version>6.1.8.Final</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,7 +100,7 @@
         </dependency>
         <dependency>
             <groupId>host.enumerableentity.gamely</groupId>
-            <artifactId>commons</artifactId>
+            <artifactId>Commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
