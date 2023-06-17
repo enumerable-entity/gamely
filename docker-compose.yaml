@@ -114,7 +114,7 @@ services:
     depends_on:
       - gateway
     volumes:
-      - ./services/front:/usr/src/cryptotalks-front
+      - ./services/front:/usr/src/gamely-front
     ports:
       - "80:80"
     networks:
